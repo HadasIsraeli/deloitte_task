@@ -4,8 +4,21 @@ const mongoose = require('mongoose');
 const getEmployees = async (req, res) => {
     try {
         const allEmployee = await Employee.find({}).sort({ createdAt: -1 });
-        console.log('allEmployee:',allEmployee);
         return res.status(200).json(allEmployee);
+    } catch (error) {
+        return res.status(400).json({ error: error.message });
+    }
+}
+
+const getSearch = async (req, res) => {
+    try {
+        const search = await Employee.find({
+            $or: [
+              { Name: { $regex: req.params.id, $options: "i" } },
+              { WorkTitle: { $regex: req.params.id, $options: "i" } }
+            ]
+          });
+        return res.status(200).json(search);
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }
@@ -21,11 +34,6 @@ const getEmployee = async (req, res) => {
         return res.status(404).json({ error: 'getEmployee no Employee found' });
     }
     res.status(200).json(employee);
-}
-
-const getSearch = async (req, res) => {
-    const search = await Employee.find({ $text: { $search: req.params.id } });
-    res.status(200).json(search);
 }
 
 const deleteEmployee = async (req, res) => {
