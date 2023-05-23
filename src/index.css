@@ -257,6 +257,11 @@ code {
 }
 
 .employee-res i {
+  margin: 10px;
+  font-size: 20px;
+}
+
+.name-avater i {
   background: #2fadad;
   border-radius: 100%;
   width: 60px;
