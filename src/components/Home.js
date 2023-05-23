@@ -58,17 +58,18 @@ const Home = () => {
       <p>Click on the search bar to learn our suggestions</p>
       <form className="search" onSubmit={hanndleSubmit}>
         <div className="results-card">
+          <div>
+            <input type="text" name="search" value={search} placeholder="Search..."
+              onKeyUp={hanndleSubmit}
+              onChange={(e) => SetSearch(e.target.value)}
+              onBlur={handleBlur} />
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 
-          <input type="text" name="search" value={search} placeholder="Search..."
-            onKeyUp={hanndleSubmit}
-            onChange={(e) => SetSearch(e.target.value)}
-            onBlur={handleBlur} />
-
-          {showResults && (results.length > 0)&& (search.length > 1) && <ResultsList results={results} />}
+          </div>
+          {(results.length > 0) && (search.length > 1) && <ResultsList results={results} />}
           {showResults && (results.length == 0) && (search.length > 1) &&
             <div className="res-not-found">Sorry, No results found.</div>}
         </div>
-        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
       {/* {isPending && <p><i class="fa-solid fa-spinner fa-spin-pulse"></i> Loading...</p>}
       {error && <p><i class="fa-solid fa-triangle-exclamation fa-beat"></i> {error}</p>} */}

@@ -2,8 +2,8 @@ import { useRef, useEffect } from "react";
 
 const Autocomplete = ({ searchText, onResults }) => {
     const previousSearchText = useRef(searchText);
+
     useEffect(() => {
-        console.log('Autocomplete', searchText, searchText.length);
         const fetchSearchResults = async () => {
             try {
                 const response = await fetch('/api/search', {
