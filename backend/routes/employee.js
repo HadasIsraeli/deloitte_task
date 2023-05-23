@@ -7,7 +7,7 @@ router.get('/employees', getEmployees);
 
 router.get('/employee/:id', getEmployee);
 
-router.get('/search/:id', getSearch);
+router.post('/search', getSearch);
 
 // router.delete('/employee/:id', deleteEmployee);
 

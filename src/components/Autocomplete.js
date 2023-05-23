@@ -1,33 +1,35 @@
-import { useRef , useEffect } from "react";
+import { useRef, useEffect } from "react";
 
-const Autocomplete = ({ searchText,onResults }) => {
+const Autocomplete = ({ searchText, onResults }) => {
     const previousSearchText = useRef(searchText);
     useEffect(() => {
-        console.log('Autocomplete:',searchText);
+        console.log('Autocomplete', searchText, searchText.length);
         const fetchSearchResults = async () => {
-          try {
-            const response = await fetch(`/api/search/${searchText}`);
-            if (response.ok) {
-              const data = await response.json();
-              console.log("Autocomplete search results", data);
-              // Process the search results here
-              onResults(data);
-            } else {
-              console.log("Autocomplete Error: Search request failed",response);
-              // Handle the error case here
+            try {
+                const response = await fetch('/api/search', {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ "searchText": searchText })
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    onResults(data);
+                } else {
+                    //Autocomplete Error: Search request failed
+                    onResults([]);
+                }
+            } catch (error) {
+                console.log("Autocomplete Error: ", error);
             }
-          } catch (error) {
-            console.log("Autocomplete Error: ", error);
-            // Handle any network or other errors here
-          }
         };
-    
+
         if (searchText && searchText !== previousSearchText.current) {
-            // Only fetch results if searchText has changed
             previousSearchText.current = searchText;
-            fetchSearchResults();
-          }
-      }, [searchText, onResults]);
+            if (searchText.length > 1) {
+                fetchSearchResults();
+            }
+        }
+    }, [searchText, onResults]);
 
     return (
         <div>

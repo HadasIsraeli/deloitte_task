@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import useFetch from "./useFetch";
 import EmployeesList from "./EmployeesList";
 import Autocomplete from "./Autocomplete";
+import ResultsList from "./ResultsList";
 
 const Home = () => {
   const [search, SetSearch] = useState('');
   const [results, setResults] = useState([]);
-  // const [err, setErr] = useState(null);
-  // const [Pending, setPending] = useState(true);
-
+  const [showResults, setShowResults] = useState(false);
   const { data: employees, error, isPending } = useFetch('/api/employees');
 
   useEffect(() => {
@@ -39,22 +38,18 @@ const Home = () => {
 
   const hanndleSubmit = async (e) => {
     e.preventDefault();
-    if (e.target.value == '' || search == '') {
+    if (search === '') {
       setResults([]);
     }
-    // setPending(true);
-    console.log(search);
-  }
+  };
 
   const handleAutocompleteResults = (res) => {
     setResults(res);
-    console.log(results);
-    // const search_results = document.getElementById('search_results');
-    // if (res.length < 1) {
-    //   search_results.innerHTML = '<P>Sorry, No Employee Found.</P>';
-    //   return;
-    // }
-    // search_results.innerHTML = '<div>found</div>';
+    setShowResults(true);
+  };
+
+  const handleBlur = () => {
+    setShowResults(false);
   };
 
   return (
@@ -62,19 +57,16 @@ const Home = () => {
       <h1>LOOKING FOR AN EMPLOYEE ? <i class="fa-solid fa-users"></i></h1>
       <p>Click on the search bar to learn our suggestions</p>
       <form className="search" onSubmit={hanndleSubmit}>
-        <input type="text" name="search" value={search} placeholder="Search..." onKeyUp={hanndleSubmit} onChange={(e) => SetSearch(e.target.value)} />
-        {/* <section id="search_results"></section> */}
-        <div className="results">
-          {results.map((result) => (
-            <div>
-              <div className="res" key={result._id}>
-                <i class={result.Avatar}></i>
-                <h4>{result.Name}</h4>
-                <h6>{result.WorkTitle}</h6>
-              </div>
-              <hr></hr>
-            </div>
-          ))}
+        <div className="results-card">
+
+          <input type="text" name="search" value={search} placeholder="Search..."
+            onKeyUp={hanndleSubmit}
+            onChange={(e) => SetSearch(e.target.value)}
+            onBlur={handleBlur} />
+
+          {showResults && (results.length > 0)&& (search.length > 1) && <ResultsList results={results} />}
+          {showResults && (results.length == 0) && (search.length > 1) &&
+            <div className="res-not-found">Sorry, No results found.</div>}
         </div>
         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
@@ -84,10 +76,6 @@ const Home = () => {
         {employees && <EmployeesList employees={employees} title='All Employees' />}
       </div>
       <Autocomplete searchText={search} onResults={handleAutocompleteResults} />
-      {/* <div className="results">
-
-        {results && <EmployeesList employees={results} title='' />}
-      </div> */}
     </div>
   );
 }
