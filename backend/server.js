@@ -12,7 +12,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use('/api', employeeRoutes);
+app.use('/.netlify/functions/api', employeeRoutes);
 
 mongoose.connect(process.env.URI_MONGO)
     .then(() => {
