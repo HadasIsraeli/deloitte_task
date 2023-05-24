@@ -13,6 +13,14 @@ code {
     monospace;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  display: none;
+}
+
 .navbar {
   padding: 10px 20px;
   display: flex;
@@ -23,11 +31,9 @@ code {
   background: #00000000;
   color: #ffffff;
   height: 55px;
-  /* position: sticky; */
 }
 
 .footer {
-  /* padding: 0px 10px; */
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -92,7 +98,6 @@ code {
   width: 160px;
   height: 200px;
   margin: 20px;
-  /* padding-bottom: 15px; */
   display: flex;
   border-radius: 20px;
   color: #000000;
@@ -124,7 +129,6 @@ code {
   margin-top: 0;
   margin-bottom: 5px;
   font-size: 20px;
-  /* color: black; */
 }
 
 .caption-container h5 {
@@ -134,7 +138,6 @@ code {
 .caption-container p {
   margin: 0;
   font-size: 12px;
-  /* color: black; */
 }
 
 .caption-container i {
@@ -156,10 +159,6 @@ code {
 .avatar i {
   font-size: 60px;
 }
-
-/* .employee-list {
-  margin-top: 140px;
-} */
 
 .fade-in-element {
   margin-top: 140px;

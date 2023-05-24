@@ -71,9 +71,9 @@ const Home = () => {
             <div className="res-not-found">Sorry, No results found.</div>}
         </div>
       </form>
-      {/* {isPending && <p><i class="fa-solid fa-spinner fa-spin-pulse"></i> Loading...</p>}
-      {error && <p><i class="fa-solid fa-triangle-exclamation fa-beat"></i> {error}</p>} */}
       <div className="fade-in-element">
+        {isPending && <p><i class="fa-solid fa-spinner fa-spin-pulse"></i> Loading...</p>}
+        {error && <p><i class="fa-solid fa-triangle-exclamation fa-beat"></i> {error}</p>}
         {employees && <EmployeesList employees={employees} title='All Employees' />}
       </div>
       <Autocomplete searchText={search} onResults={handleAutocompleteResults} />
