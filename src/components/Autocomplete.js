@@ -19,7 +19,7 @@ const Autocomplete = ({ searchText, onResults }) => {
                     onResults([]);
                 }
             } catch (error) {
-                console.log("Autocomplete Error: ", error);
+                onResults(null);
             }
         };
 

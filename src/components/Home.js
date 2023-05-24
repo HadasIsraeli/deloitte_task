@@ -15,7 +15,6 @@ const Home = () => {
       const element = document.querySelector('.fade-in-element');
       if (element) {
         const distanceToTop = element.getBoundingClientRect().top;
-        const elementHeight = element.offsetHeight;
         const windowHeight = window.innerHeight;
 
         if (distanceToTop <= windowHeight * 0.1) {
@@ -67,7 +66,7 @@ const Home = () => {
 
           </div>
           {(results.length > 0) && (search.length > 1) && <ResultsList results={results} />}
-          {showResults && (results.length == 0) && (search.length > 1) &&
+          {showResults && (results.length === 0) && (search.length > 1) &&
             <div className="res-not-found">Sorry, No results found.</div>}
         </div>
       </form>
