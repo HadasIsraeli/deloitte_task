@@ -14,10 +14,10 @@ const getSearch = async (req, res) => {
     try {
         const search = await Employee.find({
             $or: [
-              { Name: { $regex: req.body.searchText, $options: "i" } },
-              { WorkTitle: { $regex: req.body.searchText, $options: "i" } }
+                { Name: { $regex: req.body.searchText, $options: "i" } },
+                { WorkTitle: { $regex: req.body.searchText, $options: "i" } }
             ]
-          });
+        });
         return res.status(200).json(search);
     } catch (error) {
         return res.status(400).json({ error: error.message });
@@ -29,11 +29,12 @@ const getEmployee = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'getEmployee no such Employee id' });
     }
-    const employee = await Employee.findById(id);
-    if (!employee) {
-        return res.status(404).json({ error: 'getEmployee no Employee found' });
+    try {
+        const employee = await Employee.findById(id);
+        return res.status(200).json(employee);
+    } catch (error) {
+        return res.status(400).json({ error: 'getEmployee no Employee found' + error.message });
     }
-    res.status(200).json(employee);
 }
 
 module.exports = { getEmployees, getEmployee, getSearch }
