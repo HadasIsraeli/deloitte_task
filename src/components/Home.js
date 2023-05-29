@@ -39,6 +39,7 @@ const Home = () => {
     e.preventDefault();
     if (search === '') {
       setResults([]);
+      setShowResults(false);
     }
   };
 
