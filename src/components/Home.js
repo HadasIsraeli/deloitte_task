@@ -8,7 +8,7 @@ const Home = () => {
   const [search, SetSearch] = useState('');
   const [results, setResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
-  const { data: employees, error, isPending } = useFetch('/api/employees');
+  const { data: employees, error, isPending } = useFetch('https://deloitte-task-server.onrender.com/api/employees');
 
   useEffect(() => {
     const handleScroll = () => {

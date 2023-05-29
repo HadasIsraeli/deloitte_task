@@ -6,7 +6,7 @@ const Autocomplete = ({ searchText, onResults }) => {
     useEffect(() => {
         const fetchSearchResults = async () => {
             try {
-                const response = await fetch('/api/search', {
+                const response = await fetch('https://deloitte-task-server.onrender.com/api/search', {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ "searchText": searchText })

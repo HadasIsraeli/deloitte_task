@@ -4,7 +4,7 @@ import useFetch from "./useFetch";
 
 const EmployeeDetails = () => {
     const { id } = useParams();
-    const { data: employee, error, isPending } = useFetch('/api/employee/' + id);
+    const { data: employee, error, isPending } = useFetch('https://deloitte-task-server.onrender.com/api/employee/' + id);
 
     return (
         <div className="employee-details">

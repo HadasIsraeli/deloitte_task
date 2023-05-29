@@ -14,6 +14,12 @@ app.use((req, res, next) => {
 
 app.use('/api', employeeRoutes);
 
+app.use(cors({ 
+    origin: [
+        "http://localhost:3000/", 
+        "https://task-deloitte.netlify.app/"
+    ] }))
+
 mongoose.connect(process.env.URI_MONGO)
     .then(() => {
         app.listen(process.env.PORT, () => {
