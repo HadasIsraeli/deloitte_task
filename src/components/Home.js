@@ -65,7 +65,7 @@ const Home = () => {
             <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 
           </div>
-          {(results.length > 0) && (search.length > 1) && <ResultsList results={results} />}
+          {results && (results.length > 0) && (search.length > 1) && <ResultsList results={results} />}
           {showResults && (results.length === 0) && (search.length > 1) &&
             <div className="res-not-found">Sorry, No results found.</div>}
         </div>
