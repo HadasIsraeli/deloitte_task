@@ -9,11 +9,10 @@ const app = express();
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-    next();
-})
+// app.use((req, res, next) => {
+//     next();
+// })
 
-app.use('/api', employeeRoutes);
 
 app.use(
     cors({
@@ -23,7 +22,7 @@ app.use(
         ],
     })
 );
-app.options('/api/search', cors());
+app.use('/api', employeeRoutes);
 
 mongoose.connect(process.env.URI_MONGO)
     .then(() => {
