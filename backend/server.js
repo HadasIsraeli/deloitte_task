@@ -18,8 +18,8 @@ app.use('/api', employeeRoutes);
 app.use(
     cors({
         origin: [
-            "http://localhost:3000/",
-            "https://task-deloitte.netlify.app/"
+            "http://localhost:3000",
+            "https://task-deloitte.netlify.app"
         ],
     })
 );
