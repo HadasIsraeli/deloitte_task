@@ -23,6 +23,7 @@ app.use(
         ],
     })
 );
+app.options('/api/search', cors());
 
 mongoose.connect(process.env.URI_MONGO)
     .then(() => {
